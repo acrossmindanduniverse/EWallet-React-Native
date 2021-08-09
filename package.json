@@ -1,0 +1,53 @@
+{
+  "name": "EWallet",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/clipboard": "^1.5.1",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^5.11.11",
+    "@react-navigation/drawer": "^5.12.5",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.5",
+    "@twotalltotems/react-native-otp-input": "^1.3.11",
+    "axios": "^0.21.1",
+    "formik": "^2.2.9",
+    "patch-package": "^6.4.7",
+    "react": "17.0.1",
+    "react-native": "0.64.2",
+    "react-native-contacts": "^7.0.0",
+    "react-native-dotenv": "^3.0.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-image-picker": "^4.0.4",
+    "react-native-push-notification": "^7.4.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "^3.4.0",
+    "react-native-vector-icons": "^8.1.0",
+    "react-redux": "^7.2.4",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/runtime": "^7.14.6",
+    "@react-native-community/eslint-config": "^3.0.0",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.30.0",
+    "jest": "^27.0.6",
+    "metro-react-native-babel-preset": "^0.66.1",
+    "react-test-renderer": "17.0.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

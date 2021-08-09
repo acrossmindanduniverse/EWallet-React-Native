@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "847057761327",
+    "project_id": "ava-ewallet",
+    "storage_bucket": "ava-ewallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847057761327:android:289ce462a4a423352602da",
+        "android_client_info": {
+          "package_name": "com.ewallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847057761327-5cen9qc34mh458s78dhm90g881shon65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD11gjKl4qQ-eGLsbp6tB67kTpCzYY7JJ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847057761327-5cen9qc34mh458s78dhm90g881shon65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
