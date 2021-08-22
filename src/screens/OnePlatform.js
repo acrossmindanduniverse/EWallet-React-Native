@@ -242,7 +242,6 @@ const OnePlatform = props => {
                 onChangeText={val => {
                   if (val < 10000) {
                     setBalance(true);
-                    console.log(val, false);
                   } else {
                     setBalance(false);
                     console.log(val, true);
@@ -280,7 +279,7 @@ const OnePlatform = props => {
           </TouchableOpacity>
         ) : (
           <View>
-            {phone !== '' ? (
+            {phone !== '' && !balance ? (
               <TouchableOpacity
                 onPress={() => showModal(true)}
                 style={styles.continue}>

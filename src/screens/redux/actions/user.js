@@ -1,6 +1,9 @@
 import {http} from './../../helpers/http';
 import {APP_BACKEND_URL} from '@env';
 
+//https://avaewallet.herokuapp.com
+// const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
+
 export const getUserSigned = token => async dispatch => {
   try {
     const {data} = await http(token).get(`${APP_BACKEND_URL}/user`);
@@ -69,11 +72,6 @@ export const getDefaultHistory = () => dispatch => {
 
 export const updateFirstProfile = (token, setData) => async dispatch => {
   const form = new FormData();
-  form.append('picture', {
-    uri: setData.picture.uri,
-    name: setData.picture.fileName,
-    type: setData.picture.type,
-  });
   form.append('name', setData.name);
   try {
     const {data} = await http(token).put(
@@ -87,6 +85,30 @@ export const updateFirstProfile = (token, setData) => async dispatch => {
   } catch (err) {
     dispatch({
       type: 'UPDATE_FIRST_PROFILE_REJECTED',
+      error: err.response.data.data,
+    });
+  }
+};
+
+export const uploadPicture = (token, setData) => async dispatch => {
+  const form = new FormData();
+  form.append('picture', {
+    uri: setData.picture.uri,
+    name: setData.picture.fileName,
+    type: setData.picture.type,
+  });
+  try {
+    const {data} = await http(token).put(
+      `${APP_BACKEND_URL}/user/edit-profile`,
+      form,
+    );
+    dispatch({
+      type: 'UPLOAD_PICTURE',
+      payload: data.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: 'UPLOAD_PICTURE_REJECTED',
       error: err.response.data.data,
     });
   }
@@ -126,6 +148,48 @@ export const updateThirdProfile = (token, setData) => async dispatch => {
   } catch (err) {
     dispatch({
       type: 'UPDATE_THIRD_PROFILE_REJECTED',
+      error: err.response.data.data,
+    });
+  }
+};
+
+export const confirmPassword = (token, setData) => async dispatch => {
+  const form = new URLSearchParams();
+  form.append('password', setData.password);
+  try {
+    const {data} = await http(token).post(
+      `${APP_BACKEND_URL}/user/confirm-password`,
+      form,
+    );
+    dispatch({
+      type: 'CONFIRM_PASSWORD',
+      payload: data.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: 'CONFIRM_PASSWORD_REJECTED',
+      error: err.response.data.data,
+    });
+  }
+};
+
+export const updatePassword = (token, setData) => async dispatch => {
+  const form = new URLSearchParams({
+    password: setData.password,
+    resendPassword: setData.resendPassword,
+  });
+  try {
+    const {data} = await http(token).put(
+      `${APP_BACKEND_URL}/user/update-password`,
+      form,
+    );
+    dispatch({
+      type: 'EDIT_PASSWORD',
+      payload: data.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: 'EDIT_PASSWORD_REJECTED',
       error: err.response.data.data,
     });
   }

@@ -15,6 +15,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   getUserSigned,
   updateFirstProfile,
+  uploadPicture,
   errorDefault,
 } from './redux/actions/user';
 import {connect} from 'react-redux';
@@ -24,10 +25,12 @@ import {APP_BACKEND_URL} from '@env';
 const EditProfile = props => {
   const {token} = props.auth.token;
   const user = props.user.userSigned;
-  const {errMsg, updated} = props.user;
+  const {errMsg, updated, errPic, picToggle} = props.user;
   const [profile, setProfile] = useState({
-    picture: user.picture,
     name: user.name,
+  });
+  const [picture, setPicture] = useState({
+    picture: '',
   });
   const [modal, setModal] = useState(false);
   const [phoneModal, setPhoneModal] = useState(false);
@@ -36,8 +39,8 @@ const EditProfile = props => {
 
   const handleLaunchCamera = e => {
     if (!e.didCancel) {
-      setProfile({
-        ...profile,
+      setPicture({
+        ...picture,
         picture: e.assets[0],
       });
     }
@@ -46,8 +49,8 @@ const EditProfile = props => {
 
   const handleLaunchGallery = event => {
     if (!event.didCancel) {
-      setProfile({
-        ...profile,
+      setPicture({
+        ...picture,
         picture: event.assets[0],
       });
     }
@@ -55,14 +58,18 @@ const EditProfile = props => {
   };
 
   const handleUpdateProfile = () => {
-    props
-      .updateFirstProfile(token, profile)
-      .then(() => {
-        props.getUserSigned(token);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (picture.picture !== '') {
+      props.uploadPicture(token, picture);
+    } else {
+      props
+        .updateFirstProfile(token, profile)
+        .then(() => {
+          props.getUserSigned(token);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   const showModal = visible => {
@@ -77,6 +84,20 @@ const EditProfile = props => {
     props.navigation.navigate('editPhone');
     setPhoneModal(false);
   };
+
+  useEffect(() => {
+    if (picToggle) {
+      props
+        .updateFirstProfile(token, profile)
+        .then(() => {
+          props.getUserSigned(token);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [picToggle]);
 
   useEffect(() => {
     if (updated) {
@@ -101,13 +122,13 @@ const EditProfile = props => {
     if (success) {
       setTimeout(() => {
         setSpinner(false);
-        props.navigation.goBack();
+        props.navigation.navigate('home');
       }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
-  console.log(phoneModal, 'phone');
+  console.log(errPic, 'phone');
   return (
     <View style={styles.parent}>
       {spinner && (
@@ -207,11 +228,23 @@ const EditProfile = props => {
               />
             )}
           </View>
-          <TouchableOpacity
-            onPress={() => showModal(true)}
-            style={styles.uploadPicture}>
-            <Text style={styles.secondaryText}>Perbarui Foto Profile</Text>
-          </TouchableOpacity>
+          <View>
+            <View style={{height: 25, marginLeft: 15}}>
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 17,
+                  fontFamily: 'Poppins-Medium',
+                }}>
+                {errPic}
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => showModal(true)}
+              style={styles.uploadPicture}>
+              <Text style={styles.secondaryText}>Perbarui Foto Profile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View>
           <View style={styles.inputContainer}>
@@ -415,6 +448,11 @@ const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = {getUserSigned, updateFirstProfile, errorDefault};
+const mapDispatchToProps = {
+  getUserSigned,
+  updateFirstProfile,
+  uploadPicture,
+  errorDefault,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

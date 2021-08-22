@@ -8,8 +8,11 @@ import {
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {connect} from 'react-redux';
 
-const OtherMethods = () => {
+const OtherMethods = props => {
+  const {userSigned} = props.user;
+
   return (
     <View style={styles.parent}>
       <View style={styles.topUpParent}>
@@ -22,7 +25,9 @@ const OtherMethods = () => {
         <View style={styles.balanceContainer}>
           <View style={styles.balanceContent}>
             <Text style={styles.balanceText1}>SALDO AVA CASH</Text>
-            <Text style={styles.balanceText2}>Rp000</Text>
+            <Text style={styles.balanceText2}>
+              Rp{Number(userSigned.balance).toLocaleString('ind')}
+            </Text>
           </View>
           <Text style={styles.balanceMax}>
             Maks. Saldo AVA Cash Rp10.000.000
@@ -213,4 +218,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OtherMethods;
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps)(OtherMethods);

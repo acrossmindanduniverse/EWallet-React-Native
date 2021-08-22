@@ -9,8 +9,11 @@ const initialState = {
   transfer: null,
   pageInfo: [],
   historyById: [],
+  updatePassword: false,
   updated: false,
+  picToggle: false,
   errMsg: '',
+  errPic: '',
 };
 
 const user = (state = initialState, action) => {
@@ -48,6 +51,19 @@ const user = (state = initialState, action) => {
         updated: state.updated,
       };
     }
+    case 'UPLOAD_PICTURE': {
+      return {
+        ...state,
+        picToggle: !state.picToggle,
+      };
+    }
+    case 'UPLOAD_PICTURE_REJECTED': {
+      return {
+        ...state,
+        errPic: action.error,
+        picToggle: state.picToggle,
+      };
+    }
     case 'UPDATE_SECOND_PROFILE': {
       return {
         ...state,
@@ -72,10 +88,36 @@ const user = (state = initialState, action) => {
         errMsg: action.error,
       };
     }
+    case 'CONFIRM_PASSWORD': {
+      return {
+        ...state,
+        updatePassword: !state.updatePassword,
+      };
+    }
+    case 'CONFIRM_PASSWORD_REJECTED': {
+      return {
+        ...state,
+        updatePassword: state.updatePassword,
+        errMsg: action.error,
+      };
+    }
     case 'GET_USER_SIGN_FAILED': {
       return {
         ...state,
         errMsg: '',
+      };
+    }
+    case 'EDIT_PASSWORD': {
+      return {
+        ...state,
+        updatePassword: !state.updatePassword,
+      };
+    }
+    case 'EDIT_PASSWORD_REJECTED': {
+      return {
+        ...state,
+        updatePassword: !state.updatePassword,
+        errMsg: action.error,
       };
     }
     case 'GET_HISTORY': {
@@ -120,7 +162,10 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         errMsg: '',
+        errPic: '',
         updated: !state.updated,
+        picToggle: !state.picToggle,
+        updatePassword: false,
       };
     }
     case 'GET_DEFAULT_HISTORY': {

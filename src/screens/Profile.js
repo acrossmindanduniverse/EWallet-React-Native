@@ -26,14 +26,18 @@ const Profile = props => {
   };
 
   useEffect(() => {
-    setPhoneNumber(
-      userSigned.phone.replace(/\D[^.]/g, '').slice(0, 4) +
-        '-' +
-        userSigned.phone.slice(3, 6) +
-        '-' +
-        userSigned.phone.slice(6),
-    );
+    if (userSigned.phone !== null) {
+      setPhoneNumber(
+        userSigned.phone.replace(/\D[^.]/g, '').slice(0, 4) +
+          '-' +
+          userSigned.phone.slice(3, 6) +
+          '-' +
+          userSigned.phone.slice(6),
+      );
+    }
   }, [userSigned]);
+
+  console.log(userSigned.picture, ' profile');
 
   return (
     <View style={styles.parent}>
@@ -162,7 +166,7 @@ const Profile = props => {
                     </View>
                   </View>
                   <TouchableOpacity
-                    onPress={() => props.navigation.navigate('editProfile')}
+                    onPress={() => props.navigation.navigate('confirmPassword')}
                     style={styles.chevronBtn}>
                     <FontAwesome5 name="chevron-right" />
                   </TouchableOpacity>

@@ -79,12 +79,7 @@ const auth = (state = initialState, action) => {
       };
     }
     case 'AUTH_LOGOUT': {
-      return {
-        ...state,
-        data: {},
-        info: null,
-        token: null,
-      };
+      return initialState;
     }
     default: {
       return {

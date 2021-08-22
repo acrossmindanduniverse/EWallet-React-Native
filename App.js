@@ -35,6 +35,8 @@ import EditEmail from './src/screens/EditEmail';
 import EditPhone from './src/screens/EditPhone';
 import OTP from './src/screens/OTP';
 import SignUp from './src/screens/SignUp';
+import EditPassword from './src/screens/EditPassword';
+import ConfirmPassword from './src/screens/ConfirmPassword';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -144,6 +146,20 @@ const App = props => {
             }}
             component={EditProfile}
             name="editProfile"
+          />
+          <Stack.Screen
+            options={{
+              header: ProfileHeader,
+            }}
+            component={ConfirmPassword}
+            name="confirmPassword"
+          />
+          <Stack.Screen
+            options={{
+              header: ProfileHeader,
+            }}
+            component={EditPassword}
+            name="editPassword"
           />
           <Stack.Screen
             options={{

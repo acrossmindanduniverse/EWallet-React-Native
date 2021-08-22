@@ -18,7 +18,7 @@ PushNotification.configure({
       type: 'AUTH_REGISTER_TOKEN',
       payload: token,
     });
-    console.log('FCM Token 123123', token);
+    console.log('FCM Token', token);
   },
 });
 

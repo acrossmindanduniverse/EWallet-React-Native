@@ -22,6 +22,8 @@ const HomeScreen = props => {
   const [shouldMove, setShouldMove] = useState(false);
   const [arr, setArr] = useState([1, 2, 3, 4]);
 
+  console.log(props.user, 'test user');
+
   const handleMove = () => {
     setShouldMove(false);
   };
@@ -36,7 +38,7 @@ const HomeScreen = props => {
   useEffect(() => {
     if (props.auth.token !== null) {
       props.registerFcmToken(props.auth.token.token, {
-        token: props.auth.fcmToken.token,
+        token: props.auth.fcmToken?.token,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

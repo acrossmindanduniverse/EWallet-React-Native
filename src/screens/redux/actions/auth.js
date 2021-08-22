@@ -1,6 +1,8 @@
 import {http} from '../../helpers/http';
 import {APP_BACKEND_URL} from '@env';
 
+// const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
+
 export const authSignUp = setData => async dispatch => {
   const form = new URLSearchParams();
   form.append('email', setData.email);
@@ -27,7 +29,6 @@ export const authSignUp = setData => async dispatch => {
 export const authRefreshToken = (token, setData) => async dispatch => {
   const form = new URLSearchParams();
   form.append('refreshToken', setData.refreshToken);
-
   try {
     const {data} = await http(token).post(
       `${APP_BACKEND_URL}/auth/refresh-token`,
@@ -61,7 +62,7 @@ export const registerFcmToken = (authToken, setData) => async dispatch => {
   } catch (err) {
     dispatch({
       type: 'AUTH_REGISTER_TOKEN_REJECTED',
-      payload: err.response.data.data,
+      err: err.response.data.data,
     });
   }
 };
@@ -75,7 +76,7 @@ export const authSignIn = (setData, info) => async dispatch => {
       `${APP_BACKEND_URL}/auth/sign-in`,
       form.toString(),
     );
-    await dispatch({
+    dispatch({
       type: 'AUTH_SIGNIN',
       payload: data.data,
     });

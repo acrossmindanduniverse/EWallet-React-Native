@@ -18,7 +18,7 @@ import {
 } from './redux/actions/auth';
 
 const SignIn = props => {
-  const {errMsg} = props.auth;
+  const {errMsg, onAuth} = props.auth;
   console.log(props.auth);
 
   const handleSignIn = data => {
