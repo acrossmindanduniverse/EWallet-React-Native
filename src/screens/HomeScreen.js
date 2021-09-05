@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -37,7 +38,7 @@ const HomeScreen = props => {
 
   useEffect(() => {
     if (props.auth.token !== null) {
-      props.registerFcmToken(props.auth.token.token, {
+      props.registerFcmToken(props.auth.token?.token, {
         token: props.auth.fcmToken?.token,
       });
     }
@@ -70,34 +71,47 @@ const HomeScreen = props => {
             </View>
           </View>
           <View style={styles.userActionsContainer1}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('topUp')}
-              style={styles.iconActionsContainer}>
-              <IoniIcons name="add-circle-outline" style={styles.iconActions} />
-              <Text style={styles.iconActionsText}>Top Up</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('transfer')}
-              style={styles.iconActionsContainer}>
-              <MaterialCommunity
-                name="bank-transfer-in"
-                style={styles.iconActions}
-              />
-              <Text style={styles.iconActionsText}>Transfer</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate('history')}
-              style={styles.iconActionsContainer}>
-              <MaterialCommunity name="history" style={styles.iconActions} />
-              <Text style={styles.iconActionsText}>History</Text>
-            </TouchableOpacity>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginHorizontal: 10,
+              }}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('topUp')}
+                style={styles.iconActionsContainer}>
+                <IoniIcons
+                  name="add-circle-outline"
+                  style={styles.iconActions}
+                />
+                <Text style={styles.iconActionsText}>Top Up</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('transfer')}
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <MaterialCommunity
+                  name="bank-transfer-in"
+                  style={styles.iconActions}
+                />
+                <Text style={styles.iconActionsText}>Transfer</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('history')}
+                style={styles.iconActionsContainer}>
+                <MaterialCommunity name="history" style={styles.iconActions} />
+                <Text style={styles.iconActionsText}>History</Text>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={styles.userActionsContainer2}>
             <View style={styles.userActionsContent}>
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <IoniIcons
                   color="rgb(247, 181, 82)"
-                  size={40}
+                  size={20}
                   name="flash"
                   style={styles.flash}
                 />
@@ -106,7 +120,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <IoniIcons
                   color="rgb(43, 69, 237)"
-                  size={40}
+                  size={20}
                   name="phone-portrait-outline"
                   style={styles.phone}
                 />
@@ -117,7 +131,7 @@ const HomeScreen = props => {
                 style={styles.iconActionsContainer2}>
                 <IoniIcons
                   color="rgb(96, 250, 82)"
-                  size={40}
+                  size={20}
                   name="game-controller"
                   style={styles.gameController}
                 />
@@ -126,7 +140,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <AntDesign
                   color="rgb(129, 83, 245)"
-                  size={40}
+                  size={20}
                   name="areachart"
                   style={styles.AreaChart}
                 />
@@ -137,7 +151,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <IoniIcons
                   color="rgb(108, 235, 150)"
-                  size={40}
+                  size={20}
                   name="shield-checkmark-sharp"
                   style={styles.shield}
                 />
@@ -146,7 +160,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <MaterialCommunity
                   color="rgb(250, 97, 138)"
-                  size={40}
+                  size={20}
                   name="youtube-tv"
                   style={styles.tv}
                 />
@@ -157,7 +171,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <FontAwesome
                   color="rgb(86, 36, 179)"
-                  size={40}
+                  size={20}
                   name="umbrella"
                   style={styles.umbrella}
                 />
@@ -166,7 +180,7 @@ const HomeScreen = props => {
               <TouchableOpacity style={styles.iconActionsContainer2}>
                 <MaterialIcons
                   color="rgb(86, 36, 179)"
-                  size={40}
+                  size={20}
                   name="menu-book"
                   style={styles.others}
                 />
@@ -368,23 +382,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(186, 28, 28)',
   },
   userActionsContainer1: {
-    flexDirection: 'row',
     bottom: 35,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 15,
     elevation: 2,
     height: 85,
     marginHorizontal: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   iconActions: {
     fontSize: 35,
     color: 'rgb(86, 36, 179)',
-    marginHorizontal: 75,
   },
   iconActionsContainer: {
     alignItems: 'center',
+    marginHorizontal: 15,
   },
   iconActionsText: {
     color: 'rgb(86, 36, 179)',
@@ -397,11 +411,12 @@ const styles = StyleSheet.create({
   },
   userActionsContent: {
     flexDirection: 'row',
+    paddingVertical: 20,
+    paddingHorizontal: 40,
   },
   iconActionsContainer2: {
-    width: 84,
-    marginBottom: 35,
-    marginHorizontal: 35,
+    padding: 20,
+    width: '35%',
     alignItems: 'center',
   },
   userActionsContentText: {
@@ -421,7 +436,7 @@ const styles = StyleSheet.create({
   },
   info: {
     fontFamily: 'Poppins-Bold',
-    fontSize: 25,
+    fontSize: 18,
   },
   seeMore: {
     fontFamily: 'Poppins-Light',

@@ -1,8 +1,6 @@
 import {http} from '../../helpers/http';
 import {APP_BACKEND_URL} from '@env';
 
-// const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
-
 export const getAllProducts = () => async dispatch => {
   try {
     const {data} = await http().get(`${APP_BACKEND_URL}/product`);

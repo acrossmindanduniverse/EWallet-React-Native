@@ -105,10 +105,10 @@ const OnePlatform = props => {
         visible={modal}
         animationType="fade"
         onRequestClose={() => setModal(true)}>
-        <View style={styles.modalContainer}>
+        <ScrollView style={styles.modalContainer}>
           <View
             marginHorizontal={30}
-            marginVertical={100}
+            height="100%"
             borderRadius={7}
             backgroundColor="#fff">
             <View style={styles.modalContent}>
@@ -195,7 +195,7 @@ const OnePlatform = props => {
               </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </Modal>
       <ScrollView>
         <View style={styles.nameOrPhone}>

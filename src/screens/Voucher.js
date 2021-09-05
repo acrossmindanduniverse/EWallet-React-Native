@@ -16,6 +16,7 @@ const Voucher = props => {
     <View style={styles.primaryParent}>
       <View style={styles.primaryContainer}>
         <FlatList
+          keyExtractor={item => String(item)}
           data={props.product.item}
           renderItem={({item, _}) => (
             <View style={styles.primaryContent}>
@@ -45,7 +46,6 @@ const Voucher = props => {
               </TouchableOpacity>
             </View>
           )}
-          keyExtractor={(_, index) => index}
           ItemSeparatorComponent={() => (
             <View style={styles.secondaryContainer} />
           )}

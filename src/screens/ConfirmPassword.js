@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {
   View,
@@ -32,8 +33,8 @@ const ConfirmPassword = props => {
   }, [updatePassword]);
 
   return (
-    <View>
-      <View style={styles.inputParent}>
+    <View style={{flex: 1, padding: 40, justifyContent: 'center'}}>
+      <View>
         <View style={styles.inputContainer}>
           <View style={styles.errMsgContainer}>
             {errMsg !== '' && <Text style={styles.errMsg}>{errMsg}</Text>}
@@ -63,10 +64,10 @@ const ConfirmPassword = props => {
 };
 
 const styles = StyleSheet.create({
-  inputParent: {
-    marginHorizontal: 50,
-    marginVertical: 140,
-  },
+  // inputParent: {
+  //   marginHorizontal: 50,
+  //   marginVertical: 140,
+  // },
   errMsgContainer: {
     height: 40,
     justifyContent: 'center',
@@ -79,30 +80,29 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderRadius: 17,
+    padding: 25,
     backgroundColor: '#fff',
   },
   inputField: {
-    margin: 40,
     marginBottom: 70,
     borderWidth: 1,
+    padding: 12,
     borderRadius: 10,
   },
   input: {
-    marginLeft: 15,
-    fontSize: 18,
+    fontSize: 12,
     fontFamily: 'Poppins-Medium',
   },
   btnContinue: {
-    marginTop: 25,
+    marginVertical: 30,
     backgroundColor: 'rgb(86, 36, 179)',
-    justifyContent: 'center',
+    padding: 18,
     alignItems: 'center',
     borderRadius: 25,
   },
   continueText: {
     color: '#fff',
     fontSize: 18,
-    marginVertical: 15,
     fontFamily: 'Poppins-SemiBold',
   },
 });

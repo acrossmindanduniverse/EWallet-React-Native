@@ -119,7 +119,6 @@ const MainStack = () => {
 
 const App = props => {
   const {home} = props.user;
-  console.log(props.auth, 'test auth');
   return (
     <NavigationContainer>
       {props.auth.info !== null ? (

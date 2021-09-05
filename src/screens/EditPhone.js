@@ -61,16 +61,12 @@ const EditPhone = props => {
         <View style={styles.parent}>
           {spinner && (
             <View style={styles.loading}>
-              <View style={styles.loadingContainer}>
-                <ActivityIndicator size="large" color="rgb(54, 255, 181)" />
-              </View>
+              <ActivityIndicator size="large" color="rgb(54, 255, 181)" />
             </View>
           )}
           {success && (
             <View style={styles.loading}>
-              <View style={styles.loadingContainer}>
-                <Text style={styles.successText}>Phone Number Updated</Text>
-              </View>
+              <Text style={styles.successText}>Phone Number Updated</Text>
             </View>
           )}
           <ScrollView style={styles.changeParent}>
@@ -124,12 +120,10 @@ const styles = StyleSheet.create({
   loading: {
     position: 'absolute',
     width: '100%',
+    justifyContent: 'center',
     zIndex: 1,
     backgroundColor: '#000000a0',
     height: '100%',
-  },
-  loadingContainer: {
-    marginTop: 400,
   },
   successText: {
     textAlign: 'center',

@@ -2,11 +2,18 @@ import React from 'react';
 import {TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useDispatch} from 'react-redux';
+import {authLogOut} from './../redux/actions/auth';
 
-export const HomeHeader = props => {
-  // props.scene.route.name
+export const HomeHeader = () => {
+  const dispatch = useDispatch();
+
+  const test = () => {
+    dispatch(authLogOut());
+  };
+
   return (
-    <View style={homeHeaderStyles.parent}>
+    <TouchableOpacity onPress={test} style={homeHeaderStyles.parent}>
       <View style={homeHeaderStyles.HomeScreenName}>
         <Text style={homeHeaderStyles.appName}>AVA</Text>
         <TouchableOpacity style={homeHeaderStyles.notificationBtn}>
@@ -16,7 +23,7 @@ export const HomeHeader = props => {
           </View>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -117,30 +124,17 @@ export const ProfileHeader = props => {
 export const HistoryDetailHeader = ({navigation, text, date}) => {
   return (
     <View style={homeHeaderStyles.historyDetailParent}>
-      <View style={homeHeaderStyles.hitoryDetailContainer}>
-        <View style={homeHeaderStyles.hitoryDetailContent}>
-          <TouchableOpacity
-            style={homeHeaderStyles.goBack}
-            onPress={() => navigation.goBack()}>
-            <AntDesign
-              color="#000"
-              style={homeHeaderStyles.backIcon}
-              name="arrowleft"
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={homeHeaderStyles.infoParent}>
-          <View style={homeHeaderStyles.infoContainer} />
-          <Text style={homeHeaderStyles.appName2}>AVA</Text>
-          <View style={homeHeaderStyles.successParent}>
-            <View style={homeHeaderStyles.successContainer}>
-              <View style={homeHeaderStyles.successContent}>
-                <AntDesign style={homeHeaderStyles.check} name="check" />
-              </View>
-              <Text style={homeHeaderStyles.successText}>{text}</Text>
+      <View style={homeHeaderStyles.infoParent}>
+        <View style={homeHeaderStyles.infoContainer} />
+        <Text style={homeHeaderStyles.appName2}>AVA</Text>
+        <View style={homeHeaderStyles.successParent}>
+          <View style={homeHeaderStyles.successContainer}>
+            <View style={homeHeaderStyles.successContent}>
+              <AntDesign style={homeHeaderStyles.check} name="check" />
             </View>
-            <Text style={homeHeaderStyles.date}>{date}</Text>
+            <Text style={homeHeaderStyles.successText}>{text}</Text>
           </View>
+          <Text style={homeHeaderStyles.date}>{date}</Text>
         </View>
       </View>
     </View>
@@ -157,7 +151,7 @@ const homeHeaderStyles = StyleSheet.create({
     fontSize: 30,
   },
   infoParent: {
-    width: '70%',
+    width: '100%',
     alignItems: 'center',
   },
   infoContainer: {
@@ -245,7 +239,6 @@ const homeHeaderStyles = StyleSheet.create({
     borderRadius: 10 / 2,
     backgroundColor: 'rgb(186, 28, 28)',
   },
-
   TopScreenName: {
     flexDirection: 'row',
     padding: 25,
@@ -267,6 +260,5 @@ const homeHeaderStyles = StyleSheet.create({
   backIcon: {
     color: '#000',
     fontSize: 30,
-    marginHorizontal: 30,
   },
 });

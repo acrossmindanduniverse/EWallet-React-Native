@@ -133,32 +133,28 @@ const History = props => {
               visible={customDropDown}
               transparent={true}
               animationType="fade">
-              <View style={styles.modalParent}>
+              <TouchableOpacity
+                onPress={() => setCustomDropDown(false)}
+                style={styles.modalParent}>
                 <View style={styles.modalContainer}>
                   <TouchableOpacity
-                    onPress={() => showDropDown(false)}
-                    style={styles.closeContainer}>
-                    <Icon name="close" style={styles.close} />
+                    onPress={() => handleSort('asc')}
+                    style={styles.modalBtn}>
+                    <Text style={styles.modalText}>Recent</Text>
                   </TouchableOpacity>
-                  <View style={styles.modalContent}>
-                    <TouchableOpacity
-                      onPress={() => handleSort('asc')}
-                      style={styles.modalBtn}>
-                      <Text style={styles.modalText}>Recent</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => handleSort('desc')}
-                      style={styles.modalBtn}>
-                      <Text style={styles.modalText}>Oldest</Text>
-                    </TouchableOpacity>
-                  </View>
+                  <TouchableOpacity
+                    onPress={() => handleSort('desc')}
+                    style={styles.modalBtn}>
+                    <Text style={styles.modalText}>Oldest</Text>
+                  </TouchableOpacity>
                 </View>
-              </View>
+              </TouchableOpacity>
             </Modal>
           </View>
         </View>
       </View>
       <FlatList
+        keyExtractor={item => String(item)}
         data={history}
         showsVerticalScrollIndicator={false}
         onEndReachedThreshold={0.5}
@@ -232,6 +228,8 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '15%',
     marginHorizontal: 120,
     marginTop: 140,

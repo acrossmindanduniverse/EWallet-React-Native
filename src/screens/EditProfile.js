@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -181,11 +182,7 @@ const EditProfile = props => {
         onRequestClose={() => setPhoneModal(true)}>
         <View style={styles.modalContainer}>
           <View>
-            <View
-              margin={50}
-              marginTop={200}
-              backgroundColor="#fff"
-              borderRadius={7}>
+            <View backgroundColor="#fff" borderRadius={7}>
               <View style={styles.changePhoneModalContent}>
                 <Text style={styles.ensure}>
                   Apakah Anda yakin ingin mengubah nomor ponsel?
@@ -203,7 +200,7 @@ const EditProfile = props => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => showPhoneModal(false)}
-                    style={styles.optionBtn2}>
+                    style={{width: '120%', alignItems: 'center'}}>
                     <Text style={styles.noText}>BATALKAN</Text>
                   </TouchableOpacity>
                 </View>
@@ -309,6 +306,8 @@ const styles = StyleSheet.create({
   modalContainer: {
     position: 'absolute',
     width: '100%',
+    padding: 20,
+    justifyContent: 'center',
     height: '100%',
     backgroundColor: '#000000a0',
   },
@@ -325,7 +324,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   profileInfo: {
-    margin: 50,
+    paddingHorizontal: 20,
   },
   pictureContainer: {
     flexDirection: 'row',
@@ -428,8 +427,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(54, 255, 181)',
     alignItems: 'center',
     marginBottom: 20,
+    padding: 5,
     width: '100%',
-    borderRadius: 30,
+    borderRadius: 20,
   },
   yesText: {
     color: '#fff',

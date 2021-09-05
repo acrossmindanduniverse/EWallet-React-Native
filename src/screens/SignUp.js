@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {Formik} from 'formik';
 import React, {useState, useEffect} from 'react';
 import {
@@ -55,7 +56,7 @@ const SignUp = props => {
     <View style={styles.parent}>
       {spinner && (
         <View style={styles.customAlertContainer}>
-          <View marginTop={25}>
+          <View>
             <ActivityIndicator size="large" color="#fff" />
           </View>
         </View>
@@ -80,7 +81,7 @@ const SignUp = props => {
           validationSchema={validationSchema}
           onSubmit={val => handleSignUp(val)}>
           {({errors, handleChange, handleBlur, handleSubmit, values}) => (
-            <View style={styles.formContent}>
+            <View style={{padding: 20}}>
               <View>
                 <Text style={styles.errorMessage}>{errors.email}</Text>
                 <Text style={styles.errorMessage}>{errors.password}</Text>
@@ -127,21 +128,22 @@ const SignUp = props => {
 
 const styles = StyleSheet.create({
   parent: {
-    backgroundColor: 'rgb(212, 153, 255)',
+    backgroundColor: '#9333f2',
+    justifyContent: 'center',
     flex: 1,
   },
   customAlertContainer: {
     position: 'absolute',
     width: '100%',
+    justifyContent: 'center',
     zIndex: 1,
+    padding: 15,
     backgroundColor: '#000000a0',
     height: '100%',
   },
   successContainer: {
     backgroundColor: 'rgb(212, 153, 255)',
     alignItems: 'center',
-    marginTop: 25,
-    marginHorizontal: 30,
     justifyContent: 'center',
     flexDirection: 'row',
     borderRadius: 25,
@@ -156,16 +158,11 @@ const styles = StyleSheet.create({
   image: {
     height: '100%',
   },
-  signUpContainer: {
-    height: '100%',
-    justifyContent: 'flex-end',
-  },
-  formContent: {
-    marginBottom: 180,
-  },
+  // signUpContainer: {
+  //   justifyContent: 'flex-end',
+  // },
   signUp: {
     fontSize: 70,
-    marginTop: 180,
     textAlign: 'center',
     fontStyle: 'normal',
     fontFamily: 'Poppins-Bold',
@@ -177,23 +174,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 31,
   },
   signUpForm: {
+    marginVertical: 10,
     borderBottomWidth: 1,
-    height: 65,
-    marginHorizontal: 31,
     borderBottomColor: 'grey',
     fontSize: 20,
     color: '#fff',
   },
   btnContainer: {
-    marginHorizontal: 31,
-    flex: 1,
     marginTop: 40,
   },
   signUpBtn: {
     backgroundColor: 'rgb(86, 36, 179)',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
+    padding: 18,
     borderRadius: 20,
   },
   signUpText: {

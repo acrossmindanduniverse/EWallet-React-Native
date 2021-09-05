@@ -1,8 +1,6 @@
 import {http} from '../../helpers/http';
 import {APP_BACKEND_URL} from '@env';
 
-// const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
-
 export const makeTransaction = (token, setData) => async dispatch => {
   console.log(setData, 'trx');
   try {

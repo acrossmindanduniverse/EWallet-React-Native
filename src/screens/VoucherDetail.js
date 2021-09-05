@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getProductDetail} from './redux/actions/product';
@@ -97,6 +98,7 @@ const VoucherDetail = props => {
       </View>
       <ScrollView>
         <FlatList
+          keyExtractor={index => String(index)}
           data={props.product.detailProduct}
           renderItem={(item, _) => (
             <TouchableOpacity
@@ -120,7 +122,6 @@ const VoucherDetail = props => {
               </View>
             </TouchableOpacity>
           )}
-          keyExtractor={idx => idx}
         />
         <Modal
           visible={modal}
@@ -130,21 +131,15 @@ const VoucherDetail = props => {
           onRequestClose={() => {
             showModal(true);
           }}>
-          <View style={styles.modalParentContainer}>
+          <TouchableOpacity
+            onPressOut={() => showModal(false)}
+            style={styles.modalParentContainer}>
             <View style={styles.modalContainer}>
-              <View style={styles.btnContainer}>
-                <TouchableOpacity
-                  style={styles.primaryBtn}
-                  onPress={() => setModal(false)}
-                  activeOpacity={0.5}>
-                  <Text style={styles.secondaryText}>Close</Text>
-                </TouchableOpacity>
-              </View>
               <View style={styles.customTextContainer}>
                 <Text style={styles.customText}>{params[1]}</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
         </Modal>
         {itemId !== undefined && (
           <Modal
@@ -155,7 +150,9 @@ const VoucherDetail = props => {
             onRequestClose={() => {
               setPurchaseDetail(true);
             }}>
-            <View style={styles.modalParentContainer2}>
+            <TouchableOpacity
+              onPressOut={() => setPurchaseDetail(false)}
+              style={styles.modalParentContainer2}>
               <View style={styles.purchaseDetailContainer}>
                 <View style={styles.purchaseDetailContent}>
                   <Text style={styles.detailText}>Detail Pembelian</Text>
@@ -194,7 +191,7 @@ const VoucherDetail = props => {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           </Modal>
         )}
       </ScrollView>
@@ -266,10 +263,11 @@ const styles = StyleSheet.create({
     color: 'rgb(235, 224, 255)',
   },
   purchaseDetailContainer: {
-    top: 500,
     elevation: 4,
+    width: '100%',
     backgroundColor: '#fff',
-    borderRadius: 25,
+    borderTopStartRadius: 25,
+    borderTopEndRadius: 25,
   },
   purchaseDetailContent: {
     marginHorizontal: 30,
@@ -332,21 +330,27 @@ const styles = StyleSheet.create({
   },
   modalParentContainer: {
     position: 'absolute',
+    height: '100%',
     width: '100%',
     backgroundColor: '#000000a0',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
   },
   modalParentContainer2: {
     position: 'absolute',
     width: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     backgroundColor: '#000000a0',
     height: '100%',
   },
   modalContainer: {
     backgroundColor: '#fff',
     width: '100%',
-    height: 800,
-    top: 400,
-    borderRadius: 20,
+    height: '35%',
+    justifyContent: 'center',
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
   },
   customTextContainer: {
     justifyContent: 'center',

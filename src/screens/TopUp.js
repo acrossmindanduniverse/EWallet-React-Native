@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import React, {useState, useEffect} from 'react';
 import {Formik} from 'formik';
 import {
@@ -69,7 +70,7 @@ const TopUp = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
-  console.log(balance, 'test balance');
+  console.log(balance, 'balance');
 
   return (
     <View style={styles.parent}>
@@ -90,6 +91,7 @@ const TopUp = props => {
       <View style={styles.headerParent}>
         <FlatList
           horizontal
+          keyExtractor={item => String(item)}
           data={tabArr}
           renderItem={({item}) => (
             <View style={styles.btnContent}>
@@ -129,7 +131,7 @@ const TopUp = props => {
               <Text style={styles.primaryText}>Pilih Nominal Top Up</Text>
               <FlatList
                 horizontal
-                style={styles.nominalItems}
+                keyExtractor={item => String(item)}
                 data={balanceArr}
                 renderItem={({item}) => (
                   <View>
@@ -149,7 +151,6 @@ const TopUp = props => {
                     </TouchableOpacity>
                   </View>
                 )}
-                keyExtractor={(_, index) => index}
               />
               <Text style={styles.enterNominalText}>
                 Atau masukan nominal top up disini
@@ -163,8 +164,8 @@ const TopUp = props => {
                     if (val < 10000) {
                       setTyped(true);
                     } else {
+                      setBalance(parseInt(val));
                       setTyped(false);
-                      setBalance(val);
                     }
                   }}
                   placeholder="Minimal Rp.10.000"

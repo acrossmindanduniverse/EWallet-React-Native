@@ -1,8 +1,6 @@
 import {http} from '../../helpers/http';
 import {APP_BACKEND_URL} from '@env';
 
-// const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
-
 export const authSignUp = setData => async dispatch => {
   const form = new URLSearchParams();
   form.append('email', setData.email);
@@ -71,6 +69,7 @@ export const authSignIn = (setData, info) => async dispatch => {
   const form = new URLSearchParams();
   form.append('email', setData.email);
   form.append('password', setData.password);
+  console.log(form, 'test form');
   try {
     const {data} = await http(info).post(
       `${APP_BACKEND_URL}/auth/sign-in`,

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {HistoryDetailHeader} from './Components/Header';
 import {getHistoryById} from './redux/actions/user';
 import {connect} from 'react-redux';
@@ -18,7 +18,7 @@ const HistoryDetail = props => {
   return (
     <View>
       <HistoryDetailHeader text="berhasil" date={historyById.createdAt} />
-      <View>
+      <ScrollView>
         <View style={styles.parentContainer}>
           <View style={styles.parentContent}>
             <View>
@@ -61,7 +61,7 @@ const HistoryDetail = props => {
             <Ionicons style={styles.chevron} name="chevron-forward" />
           </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

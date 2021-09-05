@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +8,6 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {Formik} from 'formik';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -18,11 +18,15 @@ import {
 } from './redux/actions/auth';
 
 const SignIn = props => {
-  const {errMsg, onAuth} = props.auth;
-  console.log(props.auth);
+  const {errMsg} = props.auth;
 
-  const handleSignIn = data => {
-    props.authSignIn(data);
+  const [signIn, setSignIn] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleSignIn = () => {
+    props.authSignIn(signIn);
   };
 
   useEffect(() => {
@@ -37,146 +41,110 @@ const SignIn = props => {
   }, []);
 
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: '',
-      }}
-      onSubmit={values => handleSignIn(values)}>
-      {({handleChange, handleBlur, handleSubmit, values}) => (
-        <View style={styles.parent}>
-          <View>
-            <Text style={styles.signIn}>Sign In</Text>
-            <Text style={styles.errorMessage}>{errMsg}</Text>
-            <View>
-              <ScrollView>
-                <TextInput
-                  style={styles.signInForm}
-                  onChangeText={handleChange('email')}
-                  onBlur={handleBlur('email')}
-                  placeholder="Email Address"
-                  placeholderTextColor="#fff"
-                  value={values.email}
-                />
-                <TextInput
-                  style={styles.signInForm}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  secureTextEntry={true}
-                  placeholder="Password"
-                  placeholderTextColor="#fff"
-                  value={values.password}
-                />
-              </ScrollView>
-              <TouchableOpacity style={styles.forgotPassword}>
-                <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-              </TouchableOpacity>
-              <View style={styles.btnContainer}>
-                <TouchableOpacity
-                  style={styles.signInBtn}
-                  onPress={handleSubmit}>
-                  <Text style={styles.signInText}>Sign In</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => props.navigation.navigate('signUp')}
-                  style={styles.signUpBtn}>
-                  <Text style={styles.signUpText}>Sign Up</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+    <ScrollView style={styles.parent}>
+      <Text style={styles.signInHeaderText}>Sign In</Text>
+      <View>
+        <View>
+          <View style={{height: 25}}>
+            {errMsg !== '' && (
+              <Text style={styles.errorMessage}>
+                Email or password did not match to the record
+              </Text>
+            )}
+          </View>
+          <View style={styles.signIn}>
+            <TextInput
+              style={styles.signInText}
+              onChangeText={val =>
+                setSignIn({
+                  ...signIn,
+                  email: val,
+                })
+              }
+              placeholder="Email Address"
+            />
+          </View>
+          <View style={styles.signIn}>
+            <TextInput
+              style={styles.signInText}
+              onChangeText={val =>
+                setSignIn({
+                  ...signIn,
+                  password: val,
+                })
+              }
+              secureTextEntry={true}
+              placeholder="Password"
+            />
           </View>
         </View>
-      )}
-    </Formik>
+        <View>
+          <TouchableOpacity style={styles.signInBtn} onPress={handleSignIn}>
+            <Text style={styles.primarySignInIText}>Sign In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('signUp')}
+            style={styles.signIngBtn2}>
+            <Text style={styles.signInText2}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   parent: {
-    backgroundColor: 'rgb(212, 153, 255)',
+    backgroundColor: '#9333f2',
     flex: 1,
-  },
-  image: {
-    height: '100%',
+    padding: 40,
+    // paddingBottom: 100,
   },
   errorMessage: {
-    color: 'red',
-    marginLeft: 31,
+    color: '#e60017',
     fontSize: 20,
-  },
-  signInContainer: {
-    marginTop: 260,
   },
   signIn: {
-    fontSize: 70,
-    marginTop: 180,
-    marginLeft: 31,
-    bottom: 78,
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    color: '#fff',
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginVertical: 10,
   },
-  signInForm: {
-    borderBottomWidth: 1,
-    height: 65,
-    marginHorizontal: 31,
-    borderBottomColor: '#fff',
-    fontSize: 20,
+  signInHeaderText: {
+    fontSize: 60,
+    marginVertical: 60,
+    fontFamily: 'Poppins-Bold',
     color: '#fff',
-  },
-  btnContainer: {
-    marginHorizontal: 31,
-    marginTop: 40,
   },
   signInBtn: {
     backgroundColor: 'rgb(86, 36, 179)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 20,
-    height: 70,
+    padding: 15,
+    marginVertical: 15,
     borderRadius: 20,
   },
   signInText: {
-    fontWeight: 'bold',
+    fontFamily: 'Poppins-Medium',
+    color: '#000',
     fontSize: 20,
-    color: '#fff',
   },
-  signUpBtn: {
+  signIngBtn2: {
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
+    padding: 15,
     borderRadius: 20,
   },
-  signUpText: {
-    fontWeight: 'bold',
+  primarySignInIText: {
+    color: '#fff',
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: 20,
+  },
+  signInText2: {
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 20,
     color: 'rgb(86, 36, 179)',
-  },
-  sideBorder: {
-    marginHorizontal: 10,
-    flex: 1,
-    height: 1,
-    backgroundColor: '#fff',
-  },
-  forgotPassword: {
-    marginLeft: 31,
-    marginTop: 23,
-  },
-  forgotPasswordText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  signInOptionContainer: {
-    flexDirection: 'row',
-    marginVertical: 10,
-    alignItems: 'center',
-  },
-  signInOption: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
   },
 });
 
