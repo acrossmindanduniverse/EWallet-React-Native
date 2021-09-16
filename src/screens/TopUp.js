@@ -70,8 +70,6 @@ const TopUp = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
-  console.log(balance, 'balance');
-
   return (
     <View style={styles.parent}>
       {spinner && (

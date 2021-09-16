@@ -21,7 +21,8 @@ import {
 } from './redux/actions/user';
 import {connect} from 'react-redux';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import {APP_BACKEND_URL} from '@env';
+
+const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
 
 const EditProfile = props => {
   const {token} = props.auth.token;

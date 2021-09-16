@@ -14,7 +14,7 @@ import {connect} from 'react-redux';
 import {authLogOut} from './redux/actions/auth';
 
 const EditPassword = props => {
-  const {updatePassword: updateToggle, errMsg} = props.user;
+  const {updatePassword: updateToggle} = props.user;
   const [password, setPassword] = useState({
     password: '',
     resendPassword: '',
@@ -22,8 +22,6 @@ const EditPassword = props => {
   const [resend, setResend] = useState(false);
   const [modal, setModal] = useState(false);
   const [spinner, setSpinner] = useState(false);
-
-  console.log(password.password.length, 'test user');
 
   const handleChangePassword = () => {
     if (props.auth.token !== null) {

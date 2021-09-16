@@ -19,11 +19,8 @@ import {registerFcmToken} from './redux/actions/auth';
 import {getUserSigned, homeAction} from './redux/actions/user';
 
 const HomeScreen = props => {
-  const {info} = props.auth;
   const [shouldMove, setShouldMove] = useState(false);
-  const [arr, setArr] = useState([1, 2, 3, 4]);
-
-  console.log(props.user, 'test user');
+  const [arr] = [1, 2, 3, 4];
 
   const handleMove = () => {
     setShouldMove(false);

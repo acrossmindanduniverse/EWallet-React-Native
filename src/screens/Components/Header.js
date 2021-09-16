@@ -2,18 +2,10 @@ import React from 'react';
 import {TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useDispatch} from 'react-redux';
-import {authLogOut} from './../redux/actions/auth';
 
 export const HomeHeader = () => {
-  const dispatch = useDispatch();
-
-  const test = () => {
-    dispatch(authLogOut());
-  };
-
   return (
-    <TouchableOpacity onPress={test} style={homeHeaderStyles.parent}>
+    <View style={homeHeaderStyles.parent}>
       <View style={homeHeaderStyles.HomeScreenName}>
         <Text style={homeHeaderStyles.appName}>AVA</Text>
         <TouchableOpacity style={homeHeaderStyles.notificationBtn}>
@@ -23,7 +15,7 @@ export const HomeHeader = () => {
           </View>
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -43,7 +35,6 @@ export const TopUpHeader = props => {
 };
 
 export const TransferHeader = props => {
-  console.log(props.scene.route.name, 'test123');
   return (
     <View style={homeHeaderStyles.parent}>
       <View style={homeHeaderStyles.TopScreenName}>

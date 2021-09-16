@@ -17,8 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 const History = props => {
   const {token} = props.auth;
-  const {history, pageInfo} = props.user;
-  const getTime = new Date();
+  const {history} = props.user;
   const [tap, setTap] = useState(false);
   const [search, setSearch] = useState({
     search: '',
@@ -27,21 +26,6 @@ const History = props => {
   });
   const [screen, setScreen] = useState(1);
   const [customDropDown, setCustomDropDown] = useState(false);
-  const [newDate, setNewDate] = useState([]);
-  const dateArr = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Nov',
-    'Oct',
-    'Dec',
-  ];
 
   const scrollPagination = () => {
     setScreen(screen + 1);
@@ -63,18 +47,6 @@ const History = props => {
     setTap(false);
   };
 
-  console.log(getTime, 'history date');
-
-  const mapAllDates = data => {
-    const dataArr = [];
-    data.map(row => {
-      if (!dataArr.includes(row.createdAt)) {
-        dataArr.push(row.createdAt);
-      }
-    });
-    setNewDate(dataArr);
-  };
-
   const showDropDown = visible => {
     setCustomDropDown(visible);
   };
@@ -85,11 +57,6 @@ const History = props => {
       sort: data,
     });
   };
-
-  useEffect(() => {
-    mapAllDates(history);
-  }, [history]);
-
   useEffect(() => {
     if (!customDropDown) {
       handleSearch();
@@ -162,19 +129,7 @@ const History = props => {
         style={styles.itemParentContainer}
         renderItem={item => (
           <View>
-            {/* {newDate.map(historyDate => ( */}
             <View>
-              {/* {historyDate === item.item.createdAt && (
-                  <View style={styles.dateContainer}>
-                    <Text style={styles.dateText}>{`${getTime.getDay(
-                      historyDate,
-                    )} ${
-                      dateArr[getTime.getMonth(historyDate)]
-                    } ${getTime.getFullYear(historyDate)}, ${getTime.getHours(
-                      historyDate,
-                    )}:${getTime.getMinutes(historyDate)}`}</Text>
-                  </View>
-                )} */}
               <View style={styles.itemContainer}>
                 <TouchableOpacity
                   onPress={() =>

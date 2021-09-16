@@ -16,8 +16,6 @@ const ConfirmPassword = props => {
     password: '',
   });
 
-  console.log(updatePassword, 'test user');
-
   const handleConfirmPassword = () => {
     if (props.auth.token !== null) {
       props.confirmPassword(props.auth.token.token, password);

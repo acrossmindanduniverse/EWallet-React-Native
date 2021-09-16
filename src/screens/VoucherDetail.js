@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   FlatList,
   ActivityIndicator,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getProductDetail} from './redux/actions/product';
@@ -25,7 +24,6 @@ const VoucherDetail = props => {
   const [success, setSuccess] = useState(false);
   const [itemId, setItemId] = useState();
 
-  console.log(params, 'root');
   const showModal = visible => {
     setModal(visible);
   };
@@ -34,8 +32,6 @@ const VoucherDetail = props => {
     setItemId(id, variant);
     setPurchaseDetail(!purchaseDetail);
   };
-
-  console.log(itemId, 'variant test');
 
   const confirmTouch = () => {
     props

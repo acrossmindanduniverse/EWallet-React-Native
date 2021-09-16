@@ -1,5 +1,7 @@
 import {http} from '../../helpers/http';
-import {APP_BACKEND_URL} from '@env';
+// import {APP_BACKEND_URL} from '@env';
+
+const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
 
 export const authSignUp = setData => async dispatch => {
   const form = new URLSearchParams();

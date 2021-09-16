@@ -1,5 +1,5 @@
 import {http} from './../../helpers/http';
-import {APP_BACKEND_URL} from '@env';
+const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
 
 export const getUserSigned = token => async dispatch => {
   try {

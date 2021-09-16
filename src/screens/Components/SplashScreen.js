@@ -7,7 +7,6 @@ import {splashAction} from './../redux/actions/user';
 
 const SplashScreen = props => {
   const {token} = props.auth.info;
-  console.log(props, 'test splash');
 
   useEffect(() => {
     const refreshToken = {
@@ -30,8 +29,6 @@ const SplashScreen = props => {
     props.splashAction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(props.user.splash, 'splash component');
 
   return (
     <View style={styles.parent}>

@@ -10,8 +10,6 @@ const Voucher = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(props, 'voucher');
-
   return (
     <View style={styles.primaryParent}>
       <View style={styles.primaryContainer}>

@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {Formik} from 'formik';
-import {validationSchema} from './helpers/validation';
 import {connect} from 'react-redux';
 import {updateSecondProfile, getUserSigned} from './redux/actions/user';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -21,9 +20,7 @@ const EditPhone = props => {
   const [success, setSuccess] = useState(false);
 
   const handleUpdatePhone = data2 => {
-    console.log(data2, 'test');
     props.updateSecondProfile(token, data2).then(() => {
-      console.log('test');
       props.getUserSigned(token);
       setSpinner(true);
     });

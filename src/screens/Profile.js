@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AsyncStorage from '@react-native-community/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {connect} from 'react-redux';
 import {authLogOut} from './redux/actions/auth';
-import {APP_BACKEND_URL} from '@env';
 import {getUserSigned} from './redux/actions/user';
+
+const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
 
 const Profile = props => {
   const [phoneNumber, setPhoneNumber] = useState();
@@ -23,6 +25,7 @@ const Profile = props => {
   const handleLogOut = () => {
     props.authLogOut();
     props.getUserSigned('');
+    AsyncStorage.removeItem('persist:auth');
   };
 
   useEffect(() => {
@@ -36,8 +39,6 @@ const Profile = props => {
       );
     }
   }, [userSigned]);
-
-  console.log(userSigned.picture, ' profile');
 
   return (
     <View style={styles.parent}>

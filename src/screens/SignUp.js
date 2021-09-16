@@ -16,7 +16,7 @@ import {validationSchema} from './helpers/validation';
 
 const SignUp = props => {
   const [customAlert, setCustomAlert] = useState(false);
-  const {onToggle} = props.auth;
+  const {onToggle, signUpErrMsg} = props.auth;
   const [spinner, setSpinner] = useState(false);
 
   const handleSignUp = data => {
@@ -24,8 +24,14 @@ const SignUp = props => {
   };
 
   useEffect(() => {
-    if (onToggle) {
+    setTimeout(() => {
       props.errMsgDefault();
+    }, 2000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [signUpErrMsg]);
+
+  useEffect(() => {
+    if (onToggle) {
       setSpinner(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,6 +51,7 @@ const SignUp = props => {
   useEffect(() => {
     if (customAlert) {
       setTimeout(() => {
+        props.errMsgDefault();
         setCustomAlert(false);
         props.navigation.navigate('auth');
       }, 1000);
@@ -69,10 +76,30 @@ const SignUp = props => {
           </View>
         </View>
       )}
-      <View style={styles.signUpContainer}>
+      <View>
         <Text style={styles.signUp}>Sign Up</Text>
+        <View style={{paddingHorizontal: 90, height: 75}}>
+          {signUpErrMsg !== '' && (
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#000000a0',
+                padding: 8,
+                borderRadius: 15,
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-SemiBold',
+                  color: 'red',
+                  fontSize: 16,
+                }}>
+                {signUpErrMsg}
+              </Text>
+            </View>
+          )}
+        </View>
         <Formik
-          style={styles.input}
           initialValues={{
             email: '',
             password: '',
