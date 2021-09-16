@@ -31,7 +31,7 @@ react-native run-android
 **env**
 ```
 HTTPS=true
-API_URL_LOCAL=http://localhost:[port]
+APP_URL_LOCAL=http://localhost:[port]
 APP_BACKEND_URL=
 ```
 
