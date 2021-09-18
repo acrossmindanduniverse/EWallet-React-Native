@@ -248,7 +248,7 @@ const EditProfile = props => {
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Nama Lengkap</Text>
             <TextInput
-              value={profile.name}
+              value={profile.name !== null ? profile.name : ''}
               style={styles.primaryText}
               onChangeText={val =>
                 setProfile({

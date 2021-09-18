@@ -83,8 +83,6 @@ const OnePlatform = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]);
 
-  console.log(balance, 'balance');
-
   return (
     <View style={styles.parent}>
       {spinner && (
@@ -118,7 +116,7 @@ const OnePlatform = props => {
                 <View style={styles.receiverParent}>
                   <Text
                     style={{
-                      fontSize: 25,
+                      fontSize: 15,
                       fontFamily: 'Poppins-SemiBold',
                       color: 'rgb(86, 36, 179)',
                     }}>
@@ -126,7 +124,7 @@ const OnePlatform = props => {
                   </Text>
                 </View>
               ) : (
-                <View style={styles.receiverParent}>
+                <View>
                   <Text style={styles.primaryText}>Penerima</Text>
                   <View style={styles.receiverContainer}>
                     <View style={styles.receiverPicture}>
@@ -155,9 +153,15 @@ const OnePlatform = props => {
                 <Text style={styles.detail}>Detail</Text>
                 <View style={styles.secondaryContainer}>
                   <Text style={styles.primaryText}>Nominal Transfer</Text>
-                  <Text style={styles.detail}>
-                    Rp{Number(deductedBalance).toLocaleString('ind')}
-                  </Text>
+                  <View
+                    style={{
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={styles.detail}>
+                      Rp{Number(deductedBalance).toLocaleString('ind')}
+                    </Text>
+                  </View>
                 </View>
                 <View style={styles.secondaryContainer}>
                   <Text style={styles.primaryText}>Biaya Transaksi</Text>
@@ -173,9 +177,7 @@ const OnePlatform = props => {
               <View>
                 {errMsg !== '' ? (
                   <View style={styles.optionBtnContainer}>
-                    <TouchableOpacity
-                      onPress={() => showModal(false)}
-                      style={styles.optionBtn2}>
+                    <TouchableOpacity onPress={() => showModal(false)}>
                       <Text style={styles.noText}>EDIT</Text>
                     </TouchableOpacity>
                   </View>
@@ -187,11 +189,12 @@ const OnePlatform = props => {
                       <Text style={styles.yesText}>TRANSFER</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      onPress={() => showModal(false)}
-                      style={styles.optionBtn2}>
+                      style={{paddingTop: 10}}
+                      onPress={() => showModal(false)}>
                       <Text style={styles.noText}>BATALKAN</Text>
                     </TouchableOpacity>
                   </View>
+                  //08129312721
                 )}
               </View>
             </View>
@@ -200,7 +203,7 @@ const OnePlatform = props => {
       </Modal>
       <ScrollView>
         <View style={styles.nameOrPhone}>
-          <View style={styles.nameOrPhoneContent}>
+          <View>
             <TextInput
               style={styles.textInput1}
               value={phone}
@@ -208,9 +211,6 @@ const OnePlatform = props => {
               placeholder="Masukkan nama atau nomor ponsel"
             />
           </View>
-          <TouchableOpacity style={styles.contactIcon}>
-            <AntDesign style={styles.contacts} name="contacts" />
-          </TouchableOpacity>
         </View>
         <View style={styles.sourceContainer}>
           <Text style={styles.sourceText}>Sumber Dana</Text>
@@ -233,31 +233,26 @@ const OnePlatform = props => {
           </View>
         </View>
         <View style={styles.deductedBalanceContainer}>
-          <View style={styles.deductedBalanceContent}>
-            <Text style={styles.transferNominal}>Nominal Transfer</Text>
-            <View style={styles.inputContainer}>
-              <Text style={styles.currency}>Rp</Text>
-              <TextInput
-                style={styles.numberInput}
-                defaultValue={deductedBalance}
-                onChangeText={val => {
-                  if (val < 10000) {
-                    setBalance(true);
-                  } else {
-                    setBalance(false);
-                    console.log(val, true);
-                    setDeductedBalance(val);
-                  }
-                }}
-              />
-            </View>
-            <View style={styles.errorContainer}>
-              {balance && (
-                <Text style={styles.errorHandling}>
-                  Minimal Transfer 10.000
-                </Text>
-              )}
-            </View>
+          <Text style={styles.transferNominal}>Nominal Transfer</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.currency}>Rp</Text>
+            <TextInput
+              style={styles.numberInput}
+              defaultValue={deductedBalance}
+              onChangeText={val => {
+                if (val < 10000) {
+                  setBalance(true);
+                } else {
+                  setBalance(false);
+                  setDeductedBalance(val);
+                }
+              }}
+            />
+          </View>
+          <View style={styles.errorContainer}>
+            {balance && (
+              <Text style={styles.errorHandling}>Minimal Transfer 10.000</Text>
+            )}
           </View>
         </View>
         <View style={styles.messageContainer}>
@@ -271,7 +266,7 @@ const OnePlatform = props => {
           </View>
         </View>
       </ScrollView>
-      <View style={styles.continueContainer}>
+      <View>
         {userSigned.balance < 10000 ? (
           <TouchableOpacity
             onPress={() => props.navigation.navigate('topUp')}
@@ -280,7 +275,14 @@ const OnePlatform = props => {
           </TouchableOpacity>
         ) : (
           <View>
-            {phone !== '' && !balance ? (
+            <View style={{alignItems: 'center'}}>
+              {deductedBalance > 10000000 && (
+                <Text style={{fontFamily: 'Poppins-Light', color: 'red'}}>
+                  Nominal tidak bisa lebih dari 10.000.000
+                </Text>
+              )}
+            </View>
+            {phone !== '' && !balance && deductedBalance <= 10000000 ? (
               <TouchableOpacity
                 onPress={() => showModal(true)}
                 style={styles.continue}>
@@ -334,12 +336,12 @@ const styles = StyleSheet.create({
   confirm: {
     fontFamily: 'Poppins-Bold',
     color: 'rgb(86, 36, 179)',
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 35,
   },
   name: {
     fontFamily: 'Poppins-SemiBold',
-    fontSize: 25,
+    fontSize: 15,
   },
   receiverPicture: {
     width: 35,
@@ -353,11 +355,11 @@ const styles = StyleSheet.create({
     marginVertical: 25,
   },
   primaryText: {
-    fontSize: 25,
+    fontSize: 15,
     marginBottom: 15,
   },
   secondaryText: {
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Poppins-SemiBold',
   },
   detailContainer: {
@@ -365,7 +367,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   detail: {
-    fontSize: 25,
+    fontSize: 15,
     marginVertical: 6,
     fontFamily: 'Poppins-Bold',
   },
@@ -386,7 +388,7 @@ const styles = StyleSheet.create({
   },
   textInput1: {
     marginBottom: 7,
-    fontSize: 25,
+    fontSize: 18,
   },
   contacts: {
     fontSize: 32,
@@ -440,12 +442,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(247, 247, 247)',
     borderRadius: 7,
     marginHorizontal: 30,
-    marginVertical: 45,
-  },
-  deductedBalanceContent: {
-    marginBottom: 30,
-    marginHorizontal: 20,
-    marginVertical: 20,
+    padding: 10,
+    marginVertical: 15,
   },
   transferNominal: {
     marginVertical: 15,
@@ -454,12 +452,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   currency: {
-    fontSize: 30,
+    fontSize: 20,
     backfaceVisibility: 'hidden',
     fontFamily: 'Poppins-Bold',
   },
   numberInput: {
-    fontSize: 30,
+    fontSize: 20,
     width: '80%',
     fontFamily: 'Poppins-Bold',
   },
@@ -473,21 +471,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Medium',
   },
   messageContainer: {
-    marginTop: 110,
     marginHorizontal: 25,
   },
   continue: {
-    marginHorizontal: 25,
-    marginVertical: 35,
     borderRadius: 30,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgb(24, 237, 166)',
   },
   continue2: {
-    marginHorizontal: 25,
-    marginVertical: 35,
     borderRadius: 30,
+    margin: 10,
     justifyContent: 'center',
     opacity: 0.5,
     alignItems: 'center',
@@ -500,17 +495,15 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   optionBtnContainer: {
-    marginTop: 25,
     justifyContent: 'center',
-    marginHorizontal: 50,
+    padding: 20,
     alignItems: 'center',
   },
   optionBtn1: {
     backgroundColor: 'rgb(54, 255, 181)',
     alignItems: 'center',
-    marginBottom: 20,
-    width: '100%',
-    borderRadius: 30,
+    padding: 10,
+    borderRadius: 20,
   },
   yesText: {
     color: '#fff',

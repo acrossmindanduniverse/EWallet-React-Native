@@ -2,8 +2,14 @@ import React from 'react';
 import {TouchableOpacity, View, StyleSheet, Text} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {authLogOut} from '../redux/actions/auth';
+import {useDispatch} from 'react-redux';
 
 export const HomeHeader = () => {
+  // const dispatch = useDispatch();
+  // React.useEffect(() => {
+  //   dispatch(authLogOut());
+  // }, []);
   return (
     <View style={homeHeaderStyles.parent}>
       <View style={homeHeaderStyles.HomeScreenName}>
@@ -197,7 +203,7 @@ const homeHeaderStyles = StyleSheet.create({
   },
   appName: {
     fontFamily: 'Poppins-Medium',
-    fontSize: 30,
+    fontSize: 20,
     color: '#fff',
   },
   voucher: {

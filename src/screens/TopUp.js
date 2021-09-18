@@ -45,6 +45,8 @@ const TopUp = props => {
     });
   };
 
+  console.log(balance, 'test balance');
+
   const addBalance = data => {
     setBalance(data);
   };

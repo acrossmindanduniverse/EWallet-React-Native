@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 import {authLogOut} from './redux/actions/auth';
 import {getUserSigned} from './redux/actions/user';
 
-const APP_BACKEND_URL = 'https://avaewallet.herokuapp.com';
+const APP_BACKEND_URL = 'http://192.168.244.1:8000';
 
 const Profile = props => {
   const [phoneNumber, setPhoneNumber] = useState();
@@ -65,7 +65,10 @@ const Profile = props => {
                   </View>
                 )}
                 <View style={styles.profileInfo}>
-                  <Text style={styles.primaryText}>{userSigned.name}</Text>
+                  <Text style={styles.primaryText}>
+                    {console.log(userSigned.name)}
+                    {userSigned.name !== 'null' ? userSigned.name : ''}
+                  </Text>
                   <Text style={styles.phoneText}>{phoneNumber}</Text>
                 </View>
               </View>
